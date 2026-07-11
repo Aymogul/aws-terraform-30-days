@@ -1,0 +1,39 @@
+# ==============================================================================
+# TERRAFORM CORE & RUNTIME ACCELERATORS
+# ==============================================================================
+# Local directory containing downloaded providers, modules, and third-party binaries
+.terraform/
+
+# Lock file overrides (only ignore if explicitly using dynamic testing architectures)
+# NOTE: In standard team workflows, `.terraform.lock.hcl` SHOULD be committed 
+# to lock provider versions. Un-comment the line below only if you want to completely ignore it.
+# .terraform.lock.hcl
+
+# ==============================================================================
+# TERRAFORM STATE FILES (CRUCIAL FOR SECURITY!)
+# ==============================================================================
+# Core state files containing plain-text infrastructure mapping and secrets
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Crash dumps or automated state disaster recovery files
+crash.log
+crash.*.log
+
+# ==============================================================================
+# VARIABLES AND SECRETS
+# ==============================================================================
+# Local variable definition files that contain production credentials/API keys
+*.tfvars
+*.tfvars.json
+
+# Override configurations for tweaking local test specs
+*.override.tf
+*.override.tf.json
+_override.tf
+_override.tf.json
+
+# Local environment variables and custom CLI configs
+.terraformrc
+terraform.rc
