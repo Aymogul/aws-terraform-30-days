@@ -5,7 +5,7 @@ terraform {
     key    = "dev/terraform.tfstate"
     region = "us-east-1"
     encrypt = true
-    lock_table = "ay-terraform-remote-backend-s3-lock"
+    use_lockfile = true
   }
   required_providers {
     aws = {
