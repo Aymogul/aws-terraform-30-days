@@ -1,14 +1,4 @@
-# ============================================================================
-# Terraform Locals Examples
-# ============================================================================
-# Locals are a way to define local values that can be referenced throughout 
-# your Terraform configuration. They improve code reusability and readability.
 
-# ============================================================================
-# Example 1: Basic Local Values
-# ============================================================================
-# Use locals to define commonly used values instead of hardcoding them.
-# This makes it easier to update values in one place.
 
 locals {
   # Define the environment name once and reuse it throughout the configuration
@@ -153,51 +143,3 @@ locals {
   }
 }
 
-# ============================================================================
-# Example 7: Practical Local Value Usage in Resources
-# ============================================================================
-# Below are commented examples of how to use locals in actual resources
-
-# Example EC2 instance using locals
-# resource "aws_instance" "app" {
-#   # Reference locals instead of hardcoding values
-#   ami           = data.aws_ami.ubuntu.id
-#   instance_type = local.instance_type        # Uses computed local value
-#   
-#   tags = merge(
-#     local.common_tags,                       # Apply common tags
-#     {
-#       Name = "${local.resource_prefix}-instance"  # Use prefix local
-#     }
-#   )
-# }
-
-# Example S3 bucket using locals
-# resource "aws_s3_bucket" "data" {
-#   bucket = local.s3_bucket_name              # Uses computed local value
-#   
-#   tags = local.common_tags                   # Apply common tags
-# }
-
-# Example RDS database using locals
-# resource "aws_db_instance" "main" {
-#   identifier     = local.database_name       # Uses combined local value
-#   instance_class = local.instance_type       # Environment-specific sizing
-#   
-#   backup_retention_period = local.backup_retention_days  # Dynamic retention
-#   
-#   tags = merge(
-#     local.common_tags,
-#     local.cost_tags                          # Include cost tracking tags
-#   )
-# }
-
-# ============================================================================
-# Key Benefits of Using Locals:
-# ============================================================================
-# 1. DRY Principle: Define values once, reference many times
-# 2. Maintainability: Update values in one place affects entire configuration
-# 3. Readability: Self-documenting variable names
-# 4. Flexibility: Easy to add conditionals and computed values
-# 5. Organization: Group related configuration together
-# 6. Performance: More efficient than using many separate variables
