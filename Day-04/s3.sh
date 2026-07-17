@@ -1,5 +1,5 @@
 #use bash to creat an s3 bucket
-!/bin/bash
+#!/bin/bash
 
 
 BUCKET_NAME="terraform-state-$(date +%s)"
