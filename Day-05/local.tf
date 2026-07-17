@@ -32,7 +32,7 @@ locals {
   
   # Computed bucket name - useful for globally unique resources
   # S3 bucket names must be globally unique across all AWS accounts
-  s3_bucket_name = "${local.resource_prefix}-${data.aws_caller_identity.current.account_id}"
+  s3_bucket_name = "${local.resource_prefix}-bucket"
 }
 
 # ============================================================================
