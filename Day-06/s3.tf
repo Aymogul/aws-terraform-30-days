@@ -1,12 +1,12 @@
-# 1. The Core Bucket
+# 1. Base Storage Resource
 resource "aws_s3_bucket" "main" {
-  bucket        = "${var.project_name}-${var.environment}-bucket"
-  force_destroy = false # Prevents accidental deletion of bucket with data inside
+  bucket        = "${var.project_name}-${var.environment}-storage"
+  force_destroy = false
 
   tags = local.common_tags
 }
 
-# 2. Block All Public Access (Crucial SRE Security Standard)
+# 2. Explicit Public Access Block (Perimeter Defense)
 resource "aws_s3_bucket_public_access_block" "main" {
   bucket = aws_s3_bucket.main.id
 
@@ -16,16 +16,16 @@ resource "aws_s3_bucket_public_access_block" "main" {
   restrict_public_buckets = true
 }
 
-# 3. Ownership Controls (Modern replacement for legacy 'acl = "private"')
+# 3. Ownership Control (Disables Legacy ACLs)
 resource "aws_s3_bucket_ownership_controls" "main" {
   bucket = aws_s3_bucket.main.id
 
   rule {
-    object_ownership = "BucketOwnerEnforced" # Disables ACLs entirely (AWS Best Practice)
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
-# 4. Versioning Configuration
+# 4. State Versioning Configuration
 resource "aws_s3_bucket_versioning" "main" {
   bucket = aws_s3_bucket.main.id
 
@@ -34,9 +34,9 @@ resource "aws_s3_bucket_versioning" "main" {
   }
 }
 
-# 5. Server-Side Encryption (SSE-S3)
-resource "aws_s3_bucket_server_side_encryption_configuration" "my_bucket" {
-  bucket = aws_s3_bucket.my_bucket.id
+# 5. Default Server-Side Encryption (SSE-S3)
+resource "aws_s3_bucket_server_side_encryption_configuration" "main" {
+  bucket = aws_s3_bucket.main.id
 
   rule {
     apply_server_side_encryption_by_default {
