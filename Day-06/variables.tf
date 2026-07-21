@@ -13,4 +13,15 @@ variable "tags" {
   description = "A map of tags to apply to resources"
   type        = map(string)
   default     = {}
+}   
+
+variable "vpc_cidr" {
+  description = "The CIDR block for the VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+
+  validation {
+    condition     = can(cidrsubnet(var.vpc_cidr, 8, 0))
+    error_message = "The provided VPC CIDR block is not valid."
+  }
 }
