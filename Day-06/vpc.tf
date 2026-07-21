@@ -87,4 +87,7 @@ resource "aws_security_group" "allow_ssh" {
 
 }   
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 

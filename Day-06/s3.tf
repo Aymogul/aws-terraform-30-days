@@ -1,5 +1,5 @@
 # 1. The Core Bucket
-resource "aws_s3_bucket" "my_bucket" {
+resource "aws_s3_bucket" "main" {
   bucket        = "${var.project_name}-${var.environment}-bucket"
   force_destroy = false # Prevents accidental deletion of bucket with data inside
 
@@ -7,8 +7,8 @@ resource "aws_s3_bucket" "my_bucket" {
 }
 
 # 2. Block All Public Access (Crucial SRE Security Standard)
-resource "aws_s3_bucket_public_access_block" "my_bucket" {
-  bucket = aws_s3_bucket.my_bucket.id
+resource "aws_s3_bucket_public_access_block" "main" {
+  bucket = aws_s3_bucket.main.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -17,8 +17,8 @@ resource "aws_s3_bucket_public_access_block" "my_bucket" {
 }
 
 # 3. Ownership Controls (Modern replacement for legacy 'acl = "private"')
-resource "aws_s3_bucket_ownership_controls" "my_bucket" {
-  bucket = aws_s3_bucket.my_bucket.id
+resource "aws_s3_bucket_ownership_controls" "main" {
+  bucket = aws_s3_bucket.main.id
 
   rule {
     object_ownership = "BucketOwnerEnforced" # Disables ACLs entirely (AWS Best Practice)
@@ -26,8 +26,8 @@ resource "aws_s3_bucket_ownership_controls" "my_bucket" {
 }
 
 # 4. Versioning Configuration
-resource "aws_s3_bucket_versioning" "my_bucket" {
-  bucket = aws_s3_bucket.my_bucket.id
+resource "aws_s3_bucket_versioning" "main" {
+  bucket = aws_s3_bucket.main.id
 
   versioning_configuration {
     status = "Enabled"
