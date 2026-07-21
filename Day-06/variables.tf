@@ -25,3 +25,9 @@ variable "vpc_cidr" {
     error_message = "The provided VPC CIDR block is not valid."
   }
 }
+
+variable "region" {
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "us-east-1"
+}
