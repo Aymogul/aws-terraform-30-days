@@ -37,3 +37,4 @@ _override.tf.json
 # Local environment variables and custom CLI configs
 .terraformrc
 terraform.rc
+.DS_Store
