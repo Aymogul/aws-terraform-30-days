@@ -77,3 +77,4 @@ variable "network_config" {
   type        = tuple([string, string, number])
   description = "Network configuration (VPC CIDR, Subnet CIDR, subnet count)"
   default     = ["10.0.0.0/16", "10.0.1.0/24", 3]
+}
