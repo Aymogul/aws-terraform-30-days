@@ -31,3 +31,14 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
+variable "instance_count" {
+  description = "The number of EC2 instances to create"
+  type        = number
+  default     = 1
+}
+
+variable "enable_monitoring" {
+  description = "Enable detailed monitoring for EC2 instances"
+  type        = bool
+  default     = false
+}
